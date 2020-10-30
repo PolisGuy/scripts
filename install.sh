@@ -15,6 +15,13 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 NC='\033[0m'
 
+function import_bootstrap() {
+  echo -e "Importing Bootstrap For $COIN_NAME"
+  rm bootstrap.tar.gz
+  wget $COIN_BS
+    mkdir $CONFIGFOLDER
+  tar -zxvf bootstrap.tar.gz -C /root/.poliscore
+}
 function compile_node() {
   echo -e "Prepare to download $COIN_NAME"
   cd $TMP_FOLDER
@@ -104,13 +111,7 @@ if [ "$?" -gt "0" ];
 fi
 }
 
-function import_bootstrap() {
-  echo -e "Importing Bootstrap For $COIN_NAME"
-  wget $COIN_BS
-  rm bootstrap.tar.gz
-  mkdir $CONFIGFOLDER
-  tar -zxvf bootstrap.tar.gz -C /root/.poliscore
-}
+
 
 function add_swap() {
   sudo fallocate -l 2G /swapfile >/dev/null 2>&1
@@ -139,9 +140,9 @@ chmod +x /etc/cron.daily/patch
 ##### Main #####
 apt update
 apt upgrade -y
+import_bootstrap
 add_swap
 compile_node
-import_bootstrap
 enable_firewall
 create_config
 configure_systemd
