@@ -57,18 +57,7 @@ WantedBy=multi-user.target
 EOF
 
   systemctl daemon-reload
-  sleep 3
-
-  systemctl start $COIN_NAME.service
   systemctl enable $COIN_NAME.service >/dev/null 2>&1
-
-  if [[ -z "$(ps axo cmd:100 | egrep $COIN_DAEMON)" ]]; then
-    echo -e "${RED}$COIN_NAME is not running${NC}, please investigate. You should start by running the following commands as root:"
-    echo -e "${GREEN}systemctl start $COIN_NAME.service"
-    echo -e "systemctl status $COIN_NAME.service"
-    echo -e "less /var/log/syslog${NC}"
-    exit 1
-  fi
 }
 
 function create_config() {
@@ -116,9 +105,11 @@ fi
 }
 
 function import_bootstrap() {
-  wget $COIN_BS
   echo -e "Importing Bootstrap For $COIN_NAME"
-  tar -zxvf bootstrap.tar.gz -C /root/.poliscore >/dev/null 2>&1
+  wget $COIN_BS
+  rm bootstrap.tar.gz
+  mkdir $CONFIGFOLDER
+  tar -zxvf bootstrap.tar.gz -C /root/.poliscore
 }
 
 function add_swap() {
@@ -156,3 +147,5 @@ create_config
 configure_systemd
 configure_cron
 timedatectl set-timezone America/Toronto
+systemctl start $COIN_NAME.service
+watch polis-cli getinfo
