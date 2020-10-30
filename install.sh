@@ -71,7 +71,6 @@ EOF
   fi
 }
 
-
 function create_config() {
   mkdir $CONFIGFOLDER >/dev/null 2>&1
   RPCUSER=$(tr -cd '[:alnum:]' < /dev/urandom | fold -w10 | head -n1)
@@ -117,6 +116,7 @@ fi
 }
 
 function import_bootstrap() {
+  wget $COIN_BS
   echo -e "Importing Bootstrap For $COIN_NAME"
   tar -zxvf bootstrap.tar.gz -C /root/.poliscore >/dev/null 2>&1
 }
