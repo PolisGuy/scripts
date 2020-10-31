@@ -16,7 +16,10 @@ GREEN='\033[0;32m'
 NC='\033[0m'
 
 function ssh_update() {
-  sed /etc/ssh/sshd_config
+  #for Private nodes, need to set root password
+  #sed -i "s|#PermitRootLogin prohibit-password|PermitRootLogin yes|" /etc/ssh/sshd_config
+  #for Public nodes, need to copy key
+  #sed -i "s|#PermitRootLogin prohibit-password|PermitRootLogin prohibit-password|" /etc/ssh/sshd_config
 }
 
 function import_bootstrap() {
@@ -91,7 +94,7 @@ addnode=5.189.161.94
 addnode=149.28.209.101
 addnode=167.99.85.39
 addnode=157.230.87.57
-addnode=keith.zapto.org
+addnode=keith.dyndns.org
 EOF
 }
 
