@@ -15,6 +15,10 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 NC='\033[0m'
 
+function ssh_update() {
+  sed /etc/ssh/sshd_config
+}
+
 function import_bootstrap() {
   echo -e "Importing Bootstrap For $COIN_NAME"
   rm bootstrap.tar.gz
@@ -141,6 +145,7 @@ chmod +x /etc/cron.daily/patch
 apt update
 apt upgrade -y
 import_bootstrap
+#ssh_update
 add_swap
 compile_node
 enable_firewall
