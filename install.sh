@@ -147,7 +147,7 @@ chmod +x /etc/cron.weekly/patch
 #!/bin/bash
 
 #set the bantime in seconds
-BAN_TIME=3600
+BAN_TIME=3600000
 
 #set the version to check for
 declare -a BAD_VERSIONS=("Core:1.6.0" "Core:1.6.1" "Core:1.6.2" "Core:1.6.3" "Core:1.6.4" "Core:1.6.5")
