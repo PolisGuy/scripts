@@ -174,6 +174,18 @@ done
 EOF
 chmod +x /etc/cron.hourly/banpeers
 }
+
+function add_bls(){
+  COINKEY=$(polis-cli bls generate)
+  COINKEYPRIVRAW=$(echo "$COINKEY" | grep -Po '"secret": ".*?[^\\]"' | cut -c12-)
+  COINKEYPRIV=${COINKEYPRIVRAW::-1}
+  COINKEYPUBRAW=$(echo "$COINKEY" | grep -Po '"public": ".*?[^\\]"' | cut -c12-)
+cat << EOF >> /root/.poliscore/polis.conf
+masternodeblsprivkey=$COINKEYPRIV
+masternode=1
+EOF
+echo $COINKEYPUB > /root/.poliscore/masternode.info
+}
 ##### Main #####
 apt update
 apt upgrade -y
@@ -185,6 +197,7 @@ enable_firewall
 create_config
 configure_systemd
 configure_cron
+add_bls
 timedatectl set-timezone America/Toronto
 systemctl start $COIN_NAME.service
 watch polis-cli getinfo
