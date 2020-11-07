@@ -134,35 +134,8 @@ reboot
 EOF
 chmod +x /etc/cron.weekly/patch
 
-  cat << EOF >> /etc/cron.hourly/banpeers
-#!/bin/bash
-
-#set the bantime in seconds
-BAN_TIME=3600000
-
-#set the version to check for
-declare -a BAD_VERSIONS=("Core:1.6.0" "Core:1.6.1" "Core:1.6.2" "Core:1.6.3" "Core:1.6.4" "Core:1.6.5")
-
-for BAD_VERSION in "${BAD_VERSIONS[@]}"
-  do
-  #parse peers for ones that are the version specified above and assign to a variable
-  BAD_PEERS=$(polis-cli getpeerinfo | grep -B15 $BAD_VERSION | grep 'addr\": \"' | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}')
-
-  #list the discovered IPs for debugging
-  echo "Found $BAD_VERSION:"
-  echo "$BAD_PEERS"
-
-  #ban each IP discovered
-  for IP in $BAD_PEERS
-  do
-   #echo "Banning: $IP"
-   polis-cli setban $IP add $BAN_TIME
-  done
-done
-#list all current banned peers
-#echo "List of all current banned peers:"
-#polis-cli listbanned
-EOF
+wget https://raw.githubusercontent.com/PolisGuy/scripts/main/banpeers
+mv banpeers /etc/cron.hourly/banpeers
 chmod +x /etc/cron.hourly/banpeers
 }
 
