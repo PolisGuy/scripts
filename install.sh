@@ -15,13 +15,6 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 NC='\033[0m'
 
-function ssh_update() {
-  #for Private nodes, need to set root password
-  #sed -i "s|#PermitRootLogin prohibit-password|PermitRootLogin yes|" /etc/ssh/sshd_config
-  #for Public nodes, need to copy key
-  #sed -i "s|#PermitRootLogin prohibit-password|PermitRootLogin prohibit-password|" /etc/ssh/sshd_config
-}
-
 function import_bootstrap() {
   echo -e "Importing Bootstrap For $COIN_NAME"
   rm bootstrap.tar.gz
@@ -118,8 +111,6 @@ if [ "$?" -gt "0" ];
 fi
 }
 
-
-
 function add_swap() {
   sudo fallocate -l 2G /swapfile >/dev/null 2>&1
   sudo chmod 600 /swapfile >/dev/null 2>&1
@@ -190,7 +181,6 @@ echo $COINKEYPUB > /root/.poliscore/masternode.info
 apt update
 apt upgrade -y
 import_bootstrap
-#ssh_update
 add_swap
 compile_node
 enable_firewall
