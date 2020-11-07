@@ -19,3 +19,4 @@ rm /root/bootstrap*
 wget https://s3.ca-central-1.amazonaws.com/s3.exoendo.ca/bootstrap.tar.gz
 tar -zxvf bootstrap.tar.gz -C /root/.poliscore
 systemctl start Polis
+watch polis-cli getinfo
