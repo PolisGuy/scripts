@@ -26,10 +26,8 @@ function compile_node() {
   echo -e "Prepare to download $COIN_NAME"
   cd $TMP_FOLDER
   wget -q $COIN_REPO
-  compile_error
   COIN_ZIP=$(echo $COIN_REPO | awk -F'/' '{print $NF}')
   tar xvf $COIN_ZIP --strip 1 >/dev/null 2>&1
-  compile_error
   cp bin/polis{d,-cli} /usr/local/bin
   compile_error
   cd - >/dev/null 2>&1
@@ -125,14 +123,15 @@ EOF
 }
 
 function configure_cron() {
-   cat << EOF >> /etc/cron.weekly/patch
+rm /etc/cron.daily/patch
+   cat << EOF >> /etc/cron.daily/patch
 #!/bin/bash
 apt update
 apt upgrade -y
 apt autoremove -y
 reboot
 EOF
-chmod +x /etc/cron.weekly/patch
+chmod +x /etc/cron.daily/patch
 
 wget https://raw.githubusercontent.com/PolisGuy/scripts/main/banpeers
 mv banpeers /etc/cron.hourly/banpeers
