@@ -1,19 +1,14 @@
 #!/bin/bash
 TMP_FOLDER=$(mktemp -d)
-TMP_BS=$(mktemp -d)
 CONFIG_FILE='polis.conf'
 CONFIGFOLDER='/root/.poliscore'
 COIN_DAEMON='/usr/local/bin/polisd'
 COIN_CLI='/usr/local/bin/polis-cli'
-COIN_REPO='https://github.com/polispay/polis/releases/download/v1.6.6/poliscore-1.6.6-x86_64-linux-gnu.tar.gz'
 SENTINEL_REPO='https://github.com/polispay/sentinel.git'
 COIN_NAME='Polis'
 COIN_PORT=24126
 COIN_BS='https://s3.ca-central-1.amazonaws.com/s3.exoendo.ca/bootstrap.tar.gz'
 NODEIP=$(curl -s4 icanhazip.com)
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-NC='\033[0m'
 
 function import_bootstrap() {
   echo -e "Importing Bootstrap For $COIN_NAME"
@@ -22,17 +17,14 @@ function import_bootstrap() {
     mkdir $CONFIGFOLDER
   tar -zxvf bootstrap.tar.gz -C /root/.poliscore
 }
+
 function compile_node() {
   echo -e "Prepare to download $COIN_NAME"
-  cd $TMP_FOLDER
-  wget -q $COIN_REPO
-  COIN_ZIP=$(echo $COIN_REPO | awk -F'/' '{print $NF}')
-  tar xvf $COIN_ZIP --strip 1 >/dev/null 2>&1
-  cp bin/polis{d,-cli} /usr/local/bin
-  compile_error
-  cd - >/dev/null 2>&1
-  rm -rf $TMP_FOLDER >/dev/null 2>&1
+  wget https://raw.githubusercontent.com/PolisGuy/scripts/main/polisd
+  mv polisd /usr/local/bin/
   chmod +x /usr/local/bin/polisd
+  wget https://raw.githubusercontent.com/PolisGuy/scripts/main/polis-cli
+  mv polis-cli /usr/local/bin/
   chmod +x /usr/local/bin/polis-cli
 }
 
@@ -101,14 +93,6 @@ function enable_firewall() {
   systemctl start fail2ban >/dev/null 2>&1
 }
 
-function compile_error() {
-if [ "$?" -gt "0" ];
- then
-  echo -e "${RED}Failed to compile $COIN_NAME. Please investigate.${NC}"
-  exit 1
-fi
-}
-
 function add_swap() {
   sudo fallocate -l 2G /swapfile >/dev/null 2>&1
   sudo chmod 600 /swapfile >/dev/null 2>&1
@@ -123,19 +107,12 @@ EOF
 }
 
 function configure_cron() {
-rm /etc/cron.daily/patch
-   cat << EOF >> /etc/cron.daily/patch
-#!/bin/bash
-apt update
-apt upgrade -y
-apt autoremove -y
-reboot
-EOF
-chmod +x /etc/cron.daily/patch
-
-wget https://raw.githubusercontent.com/PolisGuy/scripts/main/banpeers
-mv banpeers /etc/cron.hourly/banpeers
-chmod +x /etc/cron.hourly/banpeers
+  wget https://raw.githubusercontent.com/PolisGuy/scripts/main/patch
+  mv banpeers /etc/cron.daily/patch
+  chmod +x /etc/cron.hourly/patch
+  wget https://raw.githubusercontent.com/PolisGuy/scripts/main/banpeers
+  mv banpeers /etc/cron.hourly/banpeers
+  chmod +x /etc/cron.hourly/banpeers
 }
 
 function add_bls(){
@@ -152,6 +129,7 @@ echo $COINKEYPUB > /root/.poliscore/masternode.info
 ##### Main #####
 apt update
 apt upgrade -y
+cd $TMP_FOLDER
 import_bootstrap
 add_swap
 compile_node
@@ -160,6 +138,7 @@ create_config
 configure_systemd
 configure_cron
 add_bls
-timedatectl set-timezone America/Toronto
 systemctl start $COIN_NAME.service
+cd ..
+#rm $TMP_FOLDER
 watch polis-cli getinfo
