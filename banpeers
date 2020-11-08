@@ -21,6 +21,7 @@ for BAD_VERSION in "${BAD_VERSIONS[@]}"
    #echo "Banning: $IP"
    polis-cli setban $IP add $BAN_TIME
   done
+done
 #list all current banned peers
 #echo "List of all current banned peers:"
 #polis-cli listbanned
