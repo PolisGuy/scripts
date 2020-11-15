@@ -116,7 +116,7 @@ function configure_cron() {
 }
 
 function add_bls(){
-  polis-cli start Polis
+  systemctl start Polis
   sleep 60
   COINKEY=$(polis-cli bls generate)
   COINKEYPRIVRAW=$(echo "$COINKEY" | grep -Po '"secret": ".*?[^\\]"' | cut -c12-)
