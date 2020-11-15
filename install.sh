@@ -140,7 +140,7 @@ create_config
 configure_systemd
 configure_cron
 add_bls
-systemctl start $COIN_NAME.service
+systemctl restart Polis
 cd ..
 #rm $TMP_FOLDER
 watch polis-cli getinfo
