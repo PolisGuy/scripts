@@ -1,10 +1,10 @@
 #!/bin/bash
 
-#set the bantime in seconds (31536000s = 1 year)
-BAN_TIME=31536000
+#set the bantime in seconds (31536000s = 1 year) (86400s = 1 day)
+BAN_TIME=86400
 
 #set the version to check for
-declare -a BAD_VERSIONS=("Core:1.6.0" "Core:1.6.1" "Core:1.6.2" "Core:1.6.3" "Core:1.6.4" "Core:1.6.5")
+declare -a BAD_VERSIONS=("Core:1.6.0" "Core:1.6.1" "Core:1.6.2" "Core:1.6.3" "Core:1.6.4" "Core:1.6.5" "Core:1.6.6")
 
 for BAD_VERSION in "${BAD_VERSIONS[@]}"
   do
