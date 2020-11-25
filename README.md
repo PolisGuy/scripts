@@ -8,9 +8,9 @@ wget ...install.sh | bash install.sh
 
 
 banpeers
-It bans all prior versions of the wallet hourly. This is usefull to prevent sync hangs caused by connecting to old peers that sometimes happen.
-To use this run:
-wget .../banpeers | mv banpeers /etc/cron.hourly/
+It bans all prior versions of the wallet hourly. This is usefull to prevent sync hangs caused by connecting to old peers that sometimes happen. This is automatically installed if you use my install.sh script above to install Polis.
+If you used Crytosharks script or other method to install then to use this run:
+wget https://raw.githubusercontent.com/PolisGuy/scripts/main/banpeers | mv banpeers /etc/cron.hourly/
 
 resetchain.sh
 This deletes all the chain data from .poliscore then installs a fresh bootstrap which is WAY faster than syncing from scratch.
