@@ -17,3 +17,7 @@ This deletes all the chain data from .poliscore then installs a fresh bootstrap 
 To use this run:
 wget .../resetchain.sh | bash resetchain.sh
 
+
+install_db.sh
+This installs Berkely DB v 4.8.
+wget https://raw.githubusercontent.com/PolisGuy/scripts/main/install_db4.sh | bash install_db4.sh /root/
