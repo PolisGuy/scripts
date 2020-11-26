@@ -1,5 +1,5 @@
 Dear fellow Polis enthusiasts,
-Here is where I keep scripts that I find usefull for managing my VPSs. All scripts assume you are logged in as root and that you are running Ubuntu 20 (although they should work on older versions too, but I just haven't bothered to test them)
+Here is where I keep scripts that I find usefull for managing my VPSs. All scripts assume you are logged in as root and that you are running Ubuntu 20 (although they should work on older versions too, but I just haven't bothered to test them).
 
 install.sh 
 This is for a fresh install of Polis. It pulls my custom compiled version of Polis with a higher connection limit.
@@ -7,9 +7,8 @@ To use this run:
 wget ...install.sh  
 bash install.sh  
 
-
 banpeers  
-It bans all prior versions of the wallet hourly. This is usefull to prevent sync hangs caused by connecting to old peers that sometimes happen. This is automatically installed if you use my install.sh script above to install Polis.  
+This bans all prior versions of the wallet. Putting in the hourly cron folder will cause it to run hourly. This is useful to prevent sync hangs caused by connecting to old peers that sometimes happen. This is automatically installed if you use my install.sh script above to install Polis.  
 If you used Crytosharks script or other method to install then to use this run:  
 wget https://raw.githubusercontent.com/PolisGuy/scripts/main/banpeers   
 mv banpeers /etc/cron.hourly/  
