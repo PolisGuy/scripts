@@ -20,10 +20,10 @@ function import_bootstrap() {
 
 function compile_node() {
   echo -e "Prepare to download $COIN_NAME"
-  wget https://raw.githubusercontent.com/PolisGuy/scripts/main/polisd
+  wget https://raw.githubusercontent.com/PolisGuy/scripts/main/bin/polisd
   mv polisd /usr/local/bin/
   chmod +x /usr/local/bin/polisd
-  wget https://raw.githubusercontent.com/PolisGuy/scripts/main/polis-cli
+  wget https://raw.githubusercontent.com/PolisGuy/scripts/main/bin/polis-cli
   mv polis-cli /usr/local/bin/
   chmod +x /usr/local/bin/polis-cli
 }
