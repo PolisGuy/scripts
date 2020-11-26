@@ -1,7 +1,10 @@
-  echo -e "Prepare to download $COIN_NAME"
-  wget https://raw.githubusercontent.com/PolisGuy/scripts/main/polisd
-  mv polisd /usr/local/bin/
-  chmod +x /usr/local/bin/polisd
-  wget https://raw.githubusercontent.com/PolisGuy/scripts/main/polis-cli
-  mv polis-cli /usr/local/bin/
-  chmod +x /usr/local/bin/polis-cli
+systemctl stop Polis
+echo "Downloading Polis binaries"
+wget https://github.com/PolisGuy/scripts/raw/main/bin/polisd
+wget https://github.com/PolisGuy/scripts/raw/main/bin/polis-cli
+mv polisd /usr/local/bin/
+mv polis-cli /usr/local/bin/
+chmod +x /usr/local/bin/polisd
+chmod +x /usr/local/bin/polis-cli
+systemctl start Polis
+watch polis-cli getinfo
