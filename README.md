@@ -4,7 +4,7 @@ Here is where I keep scripts that I find usefull for managing my VPSs. All scrip
 install.sh   
 This is for a fresh install of Polis. It pulls my custom compiled version of Polis with a higher connection limit.
 To use this run:  
-wget ...install.sh  
+wget https://raw.githubusercontent.com/PolisGuy/scripts/main/install.sh    
 bash install.sh  
 
 banpeers  
