@@ -2,9 +2,10 @@ Dear fellow Polis enthusiasts,
 Here is where I keep scripts that I find usefull for managing my VPSs. All scripts assume you are logged in as root.
 
 install.sh 
-This is for a fresh install of Polis. It pulls my custom compiled versions of Polis.
+This is for a fresh install of Polis. It pulls my custom compiled version of Polis with a higher connection limit.
 To use this run:
-wget ...install.sh | bash install.sh
+wget ...install.sh
+bash install.sh
 
 
 banpeers
@@ -22,7 +23,7 @@ bash resetchain.sh
 
 
 install_db.sh
-This installs Berkely DB v 4.8.
+This installs Berkely DB v 4.8. No need to do this manually if you use the compile_polis.sh script as it is included in that one.
 wget https://raw.githubusercontent.com/PolisGuy/scripts/main/install_db4.sh 
 bash install_db4.sh /root/
 
