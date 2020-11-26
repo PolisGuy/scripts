@@ -16,8 +16,7 @@ mv banpeers /etc/cron.hourly/
 resetchain.sh  
 This deletes all the chain data from .poliscore then installs a fresh bootstrap which is WAY faster than syncing from scratch.
 To use this run:  
-rm resetchain.sh  
-wget .../resetchain.sh   
+wget https://raw.githubusercontent.com/PolisGuy/scripts/main/resetchain.sh   
 bash resetchain.sh  
 
 
