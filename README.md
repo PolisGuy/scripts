@@ -21,3 +21,7 @@ wget .../resetchain.sh | bash resetchain.sh
 install_db.sh
 This installs Berkely DB v 4.8.
 wget https://raw.githubusercontent.com/PolisGuy/scripts/main/install_db4.sh | bash install_db4.sh /root/
+
+compile_polis.sh
+
+wget https://raw.githubusercontent.com/PolisGuy/scripts/main/compile_polis.sh | bash compile_polis.sh
