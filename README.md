@@ -3,23 +3,23 @@ Here is where I keep scripts that I find usefull for managing my VPSs. All scrip
 
 install.sh 
 This is for a fresh install of Polis. It pulls my custom compiled version of Polis with a higher connection limit.
-To use this run:
-wget ...install.sh
-bash install.sh
+To use this run:  
+wget ...install.sh  
+bash install.sh  
 
 
-banpeers
-It bans all prior versions of the wallet hourly. This is usefull to prevent sync hangs caused by connecting to old peers that sometimes happen. This is automatically installed if you use my install.sh script above to install Polis.
-If you used Crytosharks script or other method to install then to use this run:
-wget https://raw.githubusercontent.com/PolisGuy/scripts/main/banpeers 
-mv banpeers /etc/cron.hourly/
+banpeers  
+It bans all prior versions of the wallet hourly. This is usefull to prevent sync hangs caused by connecting to old peers that sometimes happen. This is automatically installed if you use my install.sh script above to install Polis.  
+If you used Crytosharks script or other method to install then to use this run:  
+wget https://raw.githubusercontent.com/PolisGuy/scripts/main/banpeers   
+mv banpeers /etc/cron.hourly/  
 
-resetchain.sh
+resetchain.sh  
 This deletes all the chain data from .poliscore then installs a fresh bootstrap which is WAY faster than syncing from scratch.
-To use this run:
-rm resetchain.sh
-wget .../resetchain.sh 
-bash resetchain.sh
+To use this run:  
+rm resetchain.sh  
+wget .../resetchain.sh   
+bash resetchain.sh  
 
 
 install_db.sh
