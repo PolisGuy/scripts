@@ -12,6 +12,7 @@ This bans all prior versions of the wallet. Putting in the hourly cron folder wi
 If you used Crytosharks script or other method to install then to use this run:  
 wget https://raw.githubusercontent.com/PolisGuy/scripts/main/banpeers   
 mv banpeers /etc/cron.hourly/  
+chmod +x /etc/cron.houly/banpeers
 
 resetchain.sh  
 This deletes all the chain data from .poliscore then installs a fresh bootstrap which is WAY faster than syncing from scratch.
