@@ -103,8 +103,8 @@ EOF
 
 function configure_cron() {
   wget https://raw.githubusercontent.com/PolisGuy/scripts/main/patch
-  mv patch /etc/cron.daily/
-  chmod +x /etc/cron.hourly/patch
+  mv patch /etc/cron.weekly/
+  chmod +x /etc/cron.weekly/patch
   wget https://raw.githubusercontent.com/PolisGuy/scripts/main/banpeers
   mv banpeers /etc/cron.hourly/
   chmod +x /etc/cron.hourly/banpeers
