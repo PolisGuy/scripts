@@ -1,5 +1,4 @@
 #!/bin/bash
-
 #set the bantime in seconds (31536000s = 1 year) (86400s = 1 day)
 BAN_TIME=86400
 
@@ -9,19 +8,12 @@ declare -a BAD_VERSIONS=("Core:1.6.0" "Core:1.6.1" "Core:1.6.2" "Core:1.6.3" "Co
 for BAD_VERSION in "${BAD_VERSIONS[@]}"
   do
   #parse peers for ones that are the version specified above and assign to a variable
-  BAD_PEERS=$(polis-cli getpeerinfo | grep -B15 $BAD_VERSION | grep 'addr\": \"' | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}')
-
-  #list the discovered IPs for debugging
-  echo "Found $BAD_VERSION:"
-  echo "$BAD_PEERS"
-
+  BAD_PEERS=$(/usr/local/bin/polis-cli -conf=/root/.poliscore/polis.conf getpeerinfo | grep -B15 $BAD_VERSION | grep 'addr\": \"' | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}')
+  echo "Bad peers: $BAD_PEERS" >> /root/logs/banpeers.log
   #ban each IP discovered
   for IP in $BAD_PEERS
   do
-   #echo "Banning: $IP"
-   polis-cli setban $IP add $BAN_TIME
+    /usr/local/bin/polis-cli -conf=/root/.poliscore/polis.conf setban $IP add $BAN_TIME
   done
 done
-#list all current banned peers
-#echo "List of all current banned peers:"
-#polis-cli listbanned
+
