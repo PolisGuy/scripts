@@ -1,0 +1,7 @@
+#script to update my bootstrap file on AWS
+systemctl stop Polis
+rm /root/bootstrap.tar.gz
+cd /root/.poliscore
+tar -cvzf /root/bootstrap.tar.gz blocks chainstate evodb llmq
+systemctl start Polis
+aws s3 cp /root/bootstrap.tar.gz  s3://s3.exoendo.ca --acl public-read
