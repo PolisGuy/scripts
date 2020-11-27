@@ -1,4 +1,5 @@
 #script to update my bootstrap file on AWS
+#!/bin/bash
 systemctl stop Polis
 rm /root/bootstrap.tar.gz
 cd /root/.poliscore
