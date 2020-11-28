@@ -65,6 +65,7 @@ function create_config() {
 rpcuser=$RPCUSER
 rpcpassword=$RPCPASSWORD
 rpcallowip=127.0.0.1
+listen=1
 staking=1
 externalip=$NODEIP:$COIN_PORT
 addnode=insight.polispay.org
