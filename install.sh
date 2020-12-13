@@ -125,6 +125,7 @@ EOF
 echo $COINKEYPUB > /root/.poliscore/masternode.info
 }
 ##### Main #####
+apt install p7zip-full
 apt update
 apt upgrade -y
 cd $TMP_FOLDER
