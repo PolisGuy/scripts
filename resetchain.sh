@@ -16,7 +16,7 @@ rm /root/.poliscore/netfulfilled.dat
 rm /root/.poliscore/peers.dat
 rm /root/.poliscore/sporks.dat
 rm /root/bootstrap*
-wget http://keith.dyndns.org/bootstrap.tar.gz
-tar -zxvf bootstrap.tar.gz -C /root/.poliscore
+wget http://keith.dyndns.org/bootstrap.7z
+7z x -o/root/.poliscore/ bootstrap.7z
 systemctl start Polis
 watch polis-cli getinfo
