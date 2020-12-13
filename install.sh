@@ -7,15 +7,14 @@ COIN_CLI='/usr/local/bin/polis-cli'
 SENTINEL_REPO='https://github.com/polispay/sentinel.git'
 COIN_NAME='Polis'
 COIN_PORT=24126
-COIN_BS='https://s3.ca-central-1.amazonaws.com/s3.exoendo.ca/bootstrap.tar.gz'
 NODEIP=$(curl -s4 icanhazip.com)
 
 function import_bootstrap() {
-  echo -e "Importing Bootstrap For $COIN_NAME"
-  rm bootstrap.tar.gz
-  wget $COIN_BS
-    mkdir $CONFIGFOLDER
-  tar -zxvf bootstrap.tar.gz -C /root/.poliscore
+  echo -e "Importing Bootstrap"
+  rm bootstrap.7z
+  wget http://keith.dyndns.org/bootstrap.7z
+  mkdir /root/.poliscore
+  7z x -o:/root/.poliscore/ bootstrap.7z
 }
 
 function compile_node() {
@@ -125,10 +124,11 @@ EOF
 echo $COINKEYPUB > /root/.poliscore/masternode.info
 }
 ##### Main #####
-apt install p7zip-full
+apt install p7zip-full -y
 apt update
 apt upgrade -y
-cd $TMP_FOLDER
+wget https://raw.githubusercontent.com/PolisGuy/scripts/main/resetchain.sh
+wget https://raw.githubusercontent.com/PolisGuy/scripts/main/update.sh
 import_bootstrap
 add_swap
 compile_node
@@ -138,6 +138,4 @@ configure_systemd
 configure_cron
 add_bls
 systemctl restart Polis
-cd ..
-#rm $TMP_FOLDER
 watch polis-cli getinfo
