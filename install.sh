@@ -1,4 +1,5 @@
 #!/bin/bash
+#Modified from Cryptoshark's install script
 TMP_FOLDER=$(mktemp -d)
 CONFIG_FILE='polis.conf'
 CONFIGFOLDER='/root/.poliscore'
