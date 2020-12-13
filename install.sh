@@ -15,7 +15,7 @@ function import_bootstrap() {
   rm bootstrap.7z
   wget http://keith.dyndns.org/bootstrap.7z
   mkdir /root/.poliscore
-  7z x -o:/root/.poliscore/ bootstrap.7z
+  7z x -o/root/.poliscore/ bootstrap.7z
 }
 
 function compile_node() {
