@@ -1,4 +1,5 @@
 #!/bin/bash
+#ban all peers more than 10 blocks behind blockbook and repeat until none are found
 #set the bantime in seconds (31536000s = 1 year) (86400s = 1 day)
 BanTime=86400
 MaxBlocksBehind=10
