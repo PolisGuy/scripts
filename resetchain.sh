@@ -1,3 +1,4 @@
+#!/bin/bash
 systemctl stop Polis
 rm /root/.poliscore/.lock
 rm /root/.poliscore/banlist.dat
