@@ -1,8 +1,9 @@
 #!/bin/bash
-#ban all peers more than 10 blocks behind blockbook and repeat until none are found
+#ban all peers more than 40 blocks behind blockbook and repeat until none are found
 #set the bantime in seconds (31536000s = 1 year) (86400s = 1 day)
 BanTime=86400
-MaxBlocksBehind=10
+#there should be 30 blocks per hour so 40 will allow nodes that use my resetchain.sh script to top up because my bootstrap is updated hourly
+MaxBlocksBehind=40
 FoundBadPeer=true
 while [ $FoundBadPeer = true ]
 do
