@@ -68,12 +68,6 @@ rpcallowip=127.0.0.1
 listen=1
 staking=1
 externalip=$NODEIP:$COIN_PORT
-addnode=insight.polispay.org
-addnode=159.65.150.236
-addnode=167.71.246.3
-addnode=143.110.145.33
-addnode=178.128.16.154
-addnode=keith.dyndns.org
 EOF
 }
 
