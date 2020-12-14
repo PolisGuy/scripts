@@ -14,7 +14,7 @@ do
         #echo "$PeerList"
         for Peer in $PeerList
         do
-            Blocks=`echo "$PeerInfo" | grep -A 20 "addr\": \"$Peer" | grep starting | grep -o '[0-9]\{1,9\}'`
+            Blocks=`echo "$PeerInfo" | grep -A 20 "addr\": \"$Peer" | grep synced_blocks | grep -o '[0-9]\{1,9\}'`
             #some peer IPs can have multiple matches
             for Block in $Blocks
             do
@@ -31,7 +31,7 @@ do
 #/usr/local/bin/polis-cli -conf=/root/.poliscore/polis.conf getpeerinfo | grep starting
 if [ $FoundBadPeer = true ]
 then
-    sleep 30
+    sleep 60
 else
     echo "All connected peers are now within $MaxBlocksBehind of current block."
 fi
