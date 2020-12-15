@@ -1,4 +1,5 @@
 #!/bin/bash
+apt install 7z-full -y
 systemctl stop Polis
 rm /root/.poliscore/.lock
 rm /root/.poliscore/banlist.dat
