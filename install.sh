@@ -66,6 +66,7 @@ rpcuser=$RPCUSER
 rpcpassword=$RPCPASSWORD
 rpcallowip=127.0.0.1
 listen=1
+banscore=1
 staking=1
 externalip=$NODEIP:$COIN_PORT
 EOF
@@ -130,7 +131,7 @@ compile_node
 enable_firewall
 create_config
 configure_systemd
-configure_cron
+#configure_cron
 add_bls
 systemctl restart Polis
 watch polis-cli getinfo
