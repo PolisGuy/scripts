@@ -1,4 +1,5 @@
 #!/bin/bash
+echo $(date) "banpeers starting" >> /var/log/banpeers.log
 #set the bantime in seconds (31536000s = 1 year) (86400s = 1 day)
 BanTime=86400
 #there should be 30 blocks per hour so 40 will allow nodes that use my resetchain.sh script to top up because my bootstrap is updated hourly
@@ -6,27 +7,27 @@ MaxBlocksBehind=40
 FoundBadPeer=true
 while [ $FoundBadPeer = true ]
 do
-        FoundBadPeer=false
-        CurrentBlock=$(curl https://blockbook.polispay.org 2>&1 | grep -o 'href=\"/block/[^\"]*'| sed 's/^.*block\///')
-        echo "Current Block is: $CurrentBlock"
-        PeerInfo=`/usr/local/bin/polis-cli -conf=/root/.poliscore/polis.conf getpeerinfo`
-        PeerList=`echo "$PeerInfo" | grep 'addr\": \"' | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}'`
-        #echo "$PeerList"
-        for Peer in $PeerList
+    FoundBadPeer=false
+    CurrentBlock=$(curl https://blockbook.polispay.org 2>&1 | grep -o 'href=\"/block/[^\"]*'| sed 's/^.*block\///')
+    echo "Current Block is: $CurrentBlock"
+    PeerInfo=`/usr/local/bin/polis-cli -conf=/root/.poliscore/polis.conf getpeerinfo`
+    PeerList=`echo "$PeerInfo" | grep 'addr\": \"' | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}'`
+    #echo "$PeerList"
+    for Peer in $PeerList
+    do
+        Blocks=`echo "$PeerInfo" | grep -A 20 "addr\": \"$Peer" | grep synced_blocks | grep -o '[0-9]\{1,9\}'`
+        #some peer IPs can have multiple matches
+        for Block in $Blocks
         do
-            Blocks=`echo "$PeerInfo" | grep -A 20 "addr\": \"$Peer" | grep synced_blocks | grep -o '[0-9]\{1,9\}'`
-            #some peer IPs can have multiple matches
-            for Block in $Blocks
-            do
-                    BlocksBehind=$(($CurrentBlock-$Block))
-                    if [ $BlocksBehind -gt $MaxBlocksBehind ];
-                        then
-                            /usr/local/bin/polis-cli -conf=/root/.poliscore/polis.conf setban $Peer add $BanTime 2>&1
-                            echo "Banning Peer $Peer for being on Block: $Block"
-                            FoundBadPeer=true
-                        fi
-                done
+            BlocksBehind=$(($CurrentBlock-$Block))
+            if [ $BlocksBehind -gt $MaxBlocksBehind ];
+            then
+                /usr/local/bin/polis-cli -conf=/root/.poliscore/polis.conf setban $Peer add $BanTime 2>&1
+                echo "Banning Peer $Peer for being on Block: $Block"
+                FoundBadPeer=true
+            fi
         done
+    done
 #echo "end of iteration"
 #/usr/local/bin/polis-cli -conf=/root/.poliscore/polis.conf getpeerinfo | grep starting
 if [ $FoundBadPeer = true ]
@@ -36,3 +37,5 @@ else
     echo "All connected peers are now within $MaxBlocksBehind of current block."
 fi
 done
+echo $(date) "banpeers ending" >> /var/log/banpeers.log
+
