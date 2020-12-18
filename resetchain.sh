@@ -8,7 +8,7 @@ while [ $Minute -lt 5 ]
 do
   echo "It is $Minute after the hour. Waiting until 5 minutes after the hour."
   sleep 10
-  minute = `date +%M`
+  Minute=`date +%M`
 done
 echo
 echo "Stopping Polis"
