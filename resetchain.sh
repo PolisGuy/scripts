@@ -13,6 +13,7 @@ done
 echo
 echo "Stopping Polis"
 systemctl stop Polis
+sleep 15
 echo
 echo "Erasing chain data"
 rm /root/.poliscore/.lock
