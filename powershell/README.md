@@ -1,10 +1,10 @@
 Note:   
-Powershell scripts are run in Powershell. Type powershell in the search bar beside the Windows start menu.  
-In order to run powershell scripts you must enable them to run. Mine isn't signed so you will have to allow unsigned scripts to run.  
-The command to do that is:  
+Powershell scripts are run in Powershell. Powershell is disabled by default on Windows so the first step is to enable it. 
+1. Type powershell in the search bar beside the Windows start menu.  
+2. Right clicking on the powershell icon in the search results and select run as administrator.
+3. Mine isn't signed so you will have to allow unsigned scripts to run.  
+4. The command to do that is:  
 Set-ExecutionPolicy Unrestricted
+5. This will give you a popup window. Click all.
 
-This will likely give you an error so you have to run powershell as administrator by right clicking on it and selecting run as administrator when you see the icon in the search results.
-Then you have to change directory to the directory where you saved the script with the cd command.  
-Finally run the script:  
-./banbadpeers.ps1
+Now you will be able to run the script. You can either run it from the commandline or you can right click on it and select "Run with PowerShell".
