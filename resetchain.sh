@@ -35,7 +35,7 @@ rm /root/.poliscore/sporks.dat
 rm /root/bootstrap*
 echo
 echo "Downloading bootstrap"
-wget https://polisguy.s3.ca-central-1.amazonaws.com/bootstrap.7z
+wget http://159.203.48.172/bootstrap.7z
 echo
 echo "Extracting bootstrap"
 7z x -o/root/.poliscore/ bootstrap.7z
