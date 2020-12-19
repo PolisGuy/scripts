@@ -45,7 +45,7 @@ if (!(Test-Path "C:\Program Files(x86)\7-Zip\7z.exe"))
 }
 
 Write-Output "2. Downloading bootstrap. This will take a few minutes depending on download speeds."
-Invoke-WebRequest -Uri https://polisguy.s3.ca-central-1.amazonaws.com/bootstrap.7z -OutFile $env:USERPROFILE\Downloads\bootstrap.7z
+Invoke-WebRequest -Uri http://159.203.48.172/bootstrap.7z -OutFile $env:USERPROFILE\Downloads\bootstrap.7z
 Write-Output "3. Stopping Polis. This will take 30 seconds."
 if ([Environment]::Is64BitOperatingSystem)
 {
