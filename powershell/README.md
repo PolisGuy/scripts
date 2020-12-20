@@ -5,6 +5,6 @@ Powershell scripts are run in Powershell. Powershell is disabled by default on W
 3. Mine isn't signed so you will have to allow unsigned scripts to run.  
 4. The command to do that is:  
 Set-ExecutionPolicy Unrestricted
-5. This will give you a popup window. Click all.
+5. This will give you a popup window or a prompt to confirm. Click or press Y.
 
 Now you will be able to run the script. You can either run it from the commandline or you can right click on it and select "Run with PowerShell".
